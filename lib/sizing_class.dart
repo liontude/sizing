@@ -4,14 +4,13 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 
 class Sizing {
-  static const Size defaultSize = Size(360, 690);
+  static const Size defaultScreenSize = Size(360, 640);
   static late Sizing _instance;
 
-  /// Size of the phone in UI Design , dp
-  late Size uiSize;
+  late Size screenSize;
 
-  /// allowFontScaling Specifies whether fonts should scale to respect Text Size accessibility settings. The default is false.
-  late bool allowFontScaling;
+  /// systemFontScale. To control whether the font size will scale or not, depending on the accessibility settings of the system. False by default.
+  late bool systemFontScale;
 
   late Orientation _orientation;
 
@@ -31,12 +30,12 @@ class Sizing {
   static void init(
     BoxConstraints constraints, {
     Orientation orientation = Orientation.portrait,
-    Size designSize = defaultSize,
-    bool allowFontScaling = false,
+    Size baseSize = defaultScreenSize,
+    bool systemFontScale = false,
   }) {
     _instance = Sizing._()
-      ..uiSize = designSize
-      ..allowFontScaling = allowFontScaling
+      ..screenSize = baseSize
+      ..systemFontScale = systemFontScale
       .._orientation = orientation;
 
     if (orientation == Orientation.portrait) {
@@ -54,32 +53,23 @@ class Sizing {
     _instance._textScaleFactor = window.textScaleFactor;
   }
 
-  ///Get screen orientation
   Orientation get orientation => _orientation;
 
-  /// The number of font pixels for each logical pixel.
   double get textScaleFactor => _textScaleFactor;
 
-  /// The size of the media in logical pixels (e.g, the size of the screen).
   double get pixelRatio => _pixelRatio;
 
-  /// The horizontal extent of this size.
   double get screenWidth => _screenWidth;
 
-  ///The vertical extent of this size. dp
   double get screenHeight => _screenHeight;
 
-  /// The offset from the top, in dp
   double get statusBarHeight => _statusBarHeight / _pixelRatio;
 
-  /// The offset from the bottom, in dp
   double get bottomBarHeight => _bottomBarHeight / _pixelRatio;
 
-  /// The ratio of actual width to UI design
-  double get scaleWidth => _screenWidth / uiSize.width;
+  double get scaleWidth => _screenWidth / screenSize.width;
 
-  ///  /// The ratio of actual height to UI design
-  double get scaleHeight => _screenHeight / uiSize.height;
+  double get scaleHeight => _screenHeight / screenSize.height;
 
   double get scaleText => min(scaleWidth, scaleHeight);
 
@@ -100,8 +90,8 @@ class Sizing {
   ///- [fontSize]
   ///Font size adaptation method
   ///- [fontSize] The size of the font on the UI design, in dp.
-  ///- [allowFontScaling]
-  double setSp(num fontSize, {bool? allowFontScalingSelf}) => allowFontScalingSelf == null
-      ? (allowFontScaling ? (fontSize * scaleText) * _textScaleFactor : (fontSize * scaleText))
-      : (allowFontScalingSelf ? (fontSize * scaleText) * _textScaleFactor : (fontSize * scaleText));
+  ///- [systemFontScale]
+  double setSp(num fontSize, {bool? systemFontScaleSelf}) => systemFontScaleSelf == null
+      ? (systemFontScale ? (fontSize * scaleText) * _textScaleFactor : (fontSize * scaleText))
+      : (systemFontScaleSelf ? (fontSize * scaleText) * _textScaleFactor : (fontSize * scaleText));
 }
