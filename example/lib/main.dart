@@ -11,39 +11,38 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return SizingInit(
-      //baseSize: Sizing().orientation == Orientation.landscape ? Size(640, 360) : Size(360, 640),
-      baseSize: Size(360, 640),
+    return SizingBuilder(
       systemFontScale: true,
       builder: () => MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Sizing',
         theme: ThemeData(
-            primaryColor: Colors.cyan,
-            primaryTextTheme: TextTheme(
-              headline6: TextStyle(
-                color: Colors.white,
-                fontSize: 16.sp,
-              ),
+          primaryColor: Colors.cyan,
+          primaryTextTheme: TextTheme(
+            headline6: TextStyle(
+              color: Colors.white,
+              fontSize: 16.ss,
             ),
-            appBarTheme: AppBarTheme(
-              centerTitle: true,
+          ),
+          appBarTheme: AppBarTheme(
+            centerTitle: true,
+          ),
+          textTheme: TextTheme(
+            headline1: TextStyle(
+              fontSize: 16.ss,
+              fontWeight: FontWeight.normal,
+              color: Colors.cyan,
             ),
-            textTheme: TextTheme(
-              headline1: TextStyle(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.normal,
-                color: Colors.cyan,
-              ),
-              headline2: TextStyle(
-                fontSize: 14.sp,
-                height: 1.5,
-              ),
-              bodyText2: TextStyle(
-                fontSize: 14.sp,
-                height: 1.5,
-              ),
-            )),
+            headline2: TextStyle(
+              fontSize: 14.ss,
+              height: 1.5,
+            ),
+            bodyText2: TextStyle(
+              fontSize: 14.ss,
+              height: 1.5,
+            ),
+          ),
+        ),
         home: MyHomePage(title: 'Sizing Demo'),
       ),
     );
@@ -72,13 +71,13 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Padding(
-              padding: EdgeInsets.all(10.w),
+              padding: EdgeInsets.all(10.s),
               child: Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: 12.h),
+                    padding: EdgeInsets.symmetric(vertical: 12.vs),
                     child: Text(
-                      'Predefined Base Size\nWidth: ${num.parse(Sizing().screenSize.width.toStringAsFixed(3))}dp   |   Height: ${num.parse(Sizing().screenSize.height.toStringAsFixed(3))}dp',
+                      'Predefined Base Size\nWidth: 360dp   |   Height: 640dp',
                       style: Theme.of(context).textTheme.headline2,
                       textAlign: TextAlign.center,
                     ),
@@ -89,15 +88,15 @@ class _MyHomePageState extends State<MyHomePage> {
                     textAlign: TextAlign.center,
                   ),
                   Text(
-                    'Width: ${num.parse(Sizing().screenWidth.toStringAsFixed(2))}dp   |   Height: ${num.parse(Sizing().screenHeight.toStringAsFixed(2))}dp',
+                    'Width: ${num.parse(MediaQuery.of(context).size.width.toStringAsFixed(2))}dp   |   Height: ${num.parse(MediaQuery.of(context).size.height.toStringAsFixed(2))}dp',
                     textAlign: TextAlign.center,
                   ),
                   Text(
-                    'Pixel Ratio: ${Sizing().pixelRatio}\nRatio of Width: ${num.parse(Sizing().scaleWidth.toStringAsFixed(3))}   |   Ratio of Height: ${num.parse(Sizing().scaleHeight.toStringAsFixed(3))}',
+                    'Pixel Ratio: ${MediaQuery.of(context).devicePixelRatio}\nRatio of Width: ${num.parse(1.s.toStringAsFixed(3))}   |   Ratio of Height: ${num.parse(1.vs.toStringAsFixed(3))}',
                     textAlign: TextAlign.center,
                   ),
                   Text(
-                    'Font Scaling Factor: ${Sizing().textScaleFactor}',
+                    'Font Scaling Factor: ${MediaQuery.of(context).textScaleFactor}',
                     textAlign: TextAlign.center,
                   ),
                 ],
@@ -107,7 +106,7 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Container(
-                  padding: EdgeInsets.all(10.w),
+                  padding: EdgeInsets.all(10.s),
                   width: 0.5.sw,
                   height: 0.25.sh,
                   color: Colors.indigoAccent,
@@ -119,7 +118,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 12.sp,
+                          fontSize: 12.ss,
                         ),
                       ),
                       Text(
@@ -128,16 +127,16 @@ class _MyHomePageState extends State<MyHomePage> {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 12.sp,
+                          fontSize: 12.ss,
                         ),
                       ),
                     ],
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.all(10.w),
-                  width: 180.w,
-                  height: 160.h,
+                  padding: EdgeInsets.all(10.s),
+                  width: 180.s,
+                  height: 160.vs,
                   color: Colors.deepPurpleAccent,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -147,16 +146,16 @@ class _MyHomePageState extends State<MyHomePage> {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 12.sp,
+                          fontSize: 12.ss,
                         ),
                       ),
                       Text(
-                        'width: 180.w (360*0.5)\n'
-                        'height: 160.h (640*0.25)',
+                        'width: 180.s (360*0.5)\n'
+                        'height: 160.vs (640*0.25)',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 12.sp,
+                          fontSize: 12.ss,
                         ),
                       ),
                     ],
@@ -165,7 +164,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
             Container(
-              padding: EdgeInsets.all(Sizing().setWidth(10)),
+              padding: EdgeInsets.all(10.s),
               width: 120.r,
               height: 120.r,
               color: Colors.green,
@@ -173,12 +172,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 'I am a square with a side length of 100',
                 style: TextStyle(
                   color: Colors.white,
-                  fontSize: Sizing().setSp(17),
+                  fontSize: 17.fss,
                 ),
               ),
             ),
             SizedBox(
-              height: 10.h,
+              height: 10.vs,
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -187,14 +186,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   'My font size is 16sp on the design draft and will not change with the system.',
                   style: TextStyle(
                     color: Colors.black,
-                    fontSize: 16.nsp,
+                    fontSize: 16.ss,
                   ),
                 ),
                 Text(
                   'My font size is 16sp on the design draft and will change with the system.',
                   style: TextStyle(
                     color: Colors.black,
-                    fontSize: 16.ssp,
+                    fontSize: 16.fss,
                   ),
                 ),
               ],
