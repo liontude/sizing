@@ -1,3 +1,4 @@
+import 'package:sizing/sizing.dart';
 import 'package:sizing/sizing_class.dart';
 
 extension SizeExtension on num {
@@ -9,4 +10,14 @@ extension SizeExtension on num {
   double get ssp => Sizing().setSp(this, systemFontScaleSelf: true);
   double get nsp => Sizing().setSp(this, systemFontScaleSelf: false);
   double get r => Sizing().radius(this);
+
+  double scale(double size) {
+    return SizingConfig.instance.screenSize.width /
+        SizingConfig.defaultScreenSize.width *
+        size;
+  }
+
+  double ms(double size, [double factor = 0.5]) {
+    return size + (scale(size) - size) * factor;
+  }
 }
