@@ -28,4 +28,14 @@ class SizingConfig {
   factory SizingConfig() {
     return _instance;
   }
+
+  double scale(num size) {
+    return SizingConfig.instance.screenSize.width /
+        SizingConfig.defaultScreenSize.width *
+        size;
+  }
+
+  double moderateScale(num size, [double factor = 0.5]) {
+    return size + (scale(size) - size) * factor;
+  }
 }
