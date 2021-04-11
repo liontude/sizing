@@ -50,18 +50,18 @@ class Sizing {
     return size + (scale(size) - size) * factor;
   }
 
-/*  double fontSmartScale(num size, [double factor = 0.5]) {
-    if (_systemFontScale) {
-      return size + (scale(size) - size) * factor * _textScaleFactor;
-    }
-    return size + (scale(size) - size) * factor;
-  }*/
-
-  double fontSmartScale(num size, [double factor = 0.5]) {
+  double fontScale(num size) {
     if (_systemFontScale) {
       return min(scale(1), verticalScale(1)) * size * _textScaleFactor;
     }
     return min(scale(1), verticalScale(1)) * size;
+  }
+
+  double fontSmartScale(num size, [double factor = 0.5]) {
+    if (_systemFontScale) {
+      return size + (scale(size) - size) * factor * _textScaleFactor;
+    }
+    return size + (scale(size) - size) * factor;
   }
 
   double screenWidth(num size) {
@@ -70,9 +70,5 @@ class Sizing {
 
   double screenHeight(num size) {
     return _screenSize.height * size;
-  }
-
-  double radius(num size) {
-    return min(scale(1), verticalScale(1)) * size;
   }
 }
