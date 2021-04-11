@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizingBuilder(
-      systemFontScale: true,
+      systemFontScale: false,
       builder: () => MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Sizing',
@@ -92,7 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     textAlign: TextAlign.center,
                   ),
                   Text(
-                    'Pixel Ratio: ${MediaQuery.of(context).devicePixelRatio}\nRatio of Width: ${num.parse(1.s.toStringAsFixed(3))}   |   Ratio of Height: ${num.parse(1.vs.toStringAsFixed(3))}',
+                    'Pixel Ratio: ${MediaQuery.of(context).devicePixelRatio}',
                     textAlign: TextAlign.center,
                   ),
                   Text(
@@ -183,18 +183,28 @@ class _MyHomePageState extends State<MyHomePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  'My font size is 16sp on the design draft and will not change with the system.',
+                  'My font size is 16',
                   style: TextStyle(
                     color: Colors.black,
-                    fontSize: 16.ss,
+                    fontSize: 16,
                   ),
                 ),
                 Text(
-                  'My font size is 16sp on the design draft and will change with the system.',
+                  'My font size is 16.ss',
                   style: TextStyle(
                     color: Colors.black,
-                    fontSize: 16.fss,
+                    fontSize: 18.ss,
                   ),
+                ),
+                Text(
+                  'My font size is 16.fss',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 18.fss,
+                  ),
+                ),
+                SizedBox(
+                  height: 10.vs,
                 ),
               ],
             )

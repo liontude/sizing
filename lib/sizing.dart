@@ -39,20 +39,23 @@ class Sizing {
   }
 
   double scale(num size) {
-    return Sizing.instance._screenSize.width /
-        Sizing.defaultScreenSize.width *
-        size;
+    return Sizing.instance._screenSize.width / Sizing.defaultScreenSize.width * size;
   }
 
   double verticalScale(num size) {
-    return Sizing.instance._screenSize.height /
-        Sizing.defaultScreenSize.height *
-        size;
+    return Sizing.instance._screenSize.height / Sizing.defaultScreenSize.height * size;
   }
 
   double smartScale(num size, [double factor = 0.5]) {
     return size + (scale(size) - size) * factor;
   }
+
+/*  double fontSmartScale(num size, [double factor = 0.5]) {
+    if (_systemFontScale) {
+      return size + (scale(size) - size) * factor * _textScaleFactor;
+    }
+    return size + (scale(size) - size) * factor;
+  }*/
 
   double fontSmartScale(num size, [double factor = 0.5]) {
     if (_systemFontScale) {
@@ -65,7 +68,7 @@ class Sizing {
     return _screenSize.width * size;
   }
 
-  double screenHeighth(num size) {
+  double screenHeight(num size) {
     return _screenSize.height * size;
   }
 
