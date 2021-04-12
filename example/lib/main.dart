@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizingBuilder(
-      systemFontScale: true,
+      systemFontScale: false,
       builder: () => MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Sizing',
@@ -65,20 +65,21 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        toolbarHeight: 40.ss,
       ),
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Padding(
-              padding: EdgeInsets.all(10.s),
+              padding: EdgeInsets.all(10.ss),
               child: Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: 12.vs),
+                    padding: EdgeInsets.only(bottom: 10.ss),
                     child: Text(
-                      'Predefined Base Size\nWidth: 360dp   |   Height: 640dp',
-                      style: Theme.of(context).textTheme.headline2,
+                      'Base Size 360x640',
+                      style: Theme.of(context).textTheme.headline2.copyWith(fontSize: 12.ss),
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -89,10 +90,6 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   Text(
                     'Width: ${num.parse(MediaQuery.of(context).size.width.toStringAsFixed(2))}dp   |   Height: ${num.parse(MediaQuery.of(context).size.height.toStringAsFixed(2))}dp',
-                    textAlign: TextAlign.center,
-                  ),
-                  Text(
-                    'Pixel Ratio: ${MediaQuery.of(context).devicePixelRatio}\nRatio of Width: ${num.parse(1.s.toStringAsFixed(3))}   |   Ratio of Height: ${num.parse(1.vs.toStringAsFixed(3))}',
                     textAlign: TextAlign.center,
                   ),
                   Text(
@@ -163,38 +160,95 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ],
             ),
-            Container(
-              padding: EdgeInsets.all(10.s),
-              width: 120.r,
-              height: 120.r,
-              color: Colors.green,
-              child: Text(
-                'I am a square with a side length of 100',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 17.fss,
+            SizedBox(
+              height: 10.ss,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  padding: EdgeInsets.all(10),
+                  width: 100,
+                  height: 100,
+                  color: Colors.cyan[600],
+                  child: FittedBox(
+                    fit: BoxFit.fitWidth,
+                    child: Text(
+                      'width: 100\nheight: 100',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
                 ),
-              ),
+                Container(
+                  padding: EdgeInsets.all(10),
+                  width: 100.s,
+                  height: 100.s,
+                  color: Colors.cyan[600],
+                  child: FittedBox(
+                    fit: BoxFit.fitWidth,
+                    child: Text(
+                      'Scale\nwidth: 100.s\nheight: 100.s',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 9,
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.all(10),
+                  width: 100.ss,
+                  height: 100.ss,
+                  color: Colors.cyan[600],
+                  child: FittedBox(
+                    fit: BoxFit.fitWidth,
+                    child: Text(
+                      'Smart Scale\nwidth: 100.ss\nheight: 100.ss',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
             SizedBox(
-              height: 10.vs,
+              height: 10.ss,
             ),
             Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  'My font size is 16sp on the design draft and will not change with the system.',
+                  'fontSize: 16 | Without Sizing',
+                  textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 16.ss,
+                    fontSize: 16,
+                    height: 1.5,
                   ),
                 ),
                 Text(
-                  'My font size is 16sp on the design draft and will change with the system.',
+                  'fontSize: 16.fs | Font Scale ${num.parse(16.fs.toStringAsFixed(2))}',
+                  textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 16.fss,
+                    fontSize: 16.fs,
+                    height: 1.5,
                   ),
+                ),
+                Text(
+                  'fontSize: 16.fss | Font Smart Scale ${num.parse(16.fss.toStringAsFixed(2))}',
+                  style: TextStyle(
+                    fontSize: 16.fss,
+                    height: 1.5,
+                  ),
+                ),
+                SizedBox(
+                  height: 10.vs,
                 ),
               ],
             )

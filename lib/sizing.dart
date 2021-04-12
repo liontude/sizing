@@ -84,7 +84,7 @@ class Sizing {
     return _screenSize.width * size;
   }
 
-  double screenHeighth(num size) {
+  double screenHeight(num size) {
     return _screenSize.height * size;
   }
 
