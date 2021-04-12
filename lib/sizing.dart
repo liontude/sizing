@@ -54,11 +54,30 @@ class Sizing {
     return size + (scale(size) - size) * factor;
   }
 
-  double fontSmartScale(num size, [double factor = 0.5]) {
-    if (_systemFontScale) {
+  double fontScale(
+    num size, [
+    bool systemFontScale = false,
+    double factor = 0.5,
+  ]) {
+    if (systemFontScale) {
+      return min(scale(1), verticalScale(1)) * size * _textScaleFactor;
+    } else if (_systemFontScale) {
       return min(scale(1), verticalScale(1)) * size * _textScaleFactor;
     }
-    return min(scale(1), verticalScale(1)) * size;
+    return min(scale(1), verticalScale(1)) * size / _textScaleFactor;
+  }
+
+  double fontSmartScale(
+    num size, [
+    bool systemFontScale = false,
+    double factor = 0.5,
+  ]) {
+    if (systemFontScale) {
+      return smartScale(size, factor) * _textScaleFactor;
+    } else if (_systemFontScale) {
+      return smartScale(size, factor) * _textScaleFactor;
+    }
+    return smartScale(size, factor) / _textScaleFactor;
   }
 
   double screenWidth(num size) {
