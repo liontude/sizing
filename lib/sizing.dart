@@ -54,11 +54,7 @@ class Sizing {
     return size + (scale(size) - size) * factor;
   }
 
-  double fontScale(
-    num size, [
-    bool systemFontScale = false,
-    double factor = 0.5,
-  ]) {
+  double fontScale(num size, [bool systemFontScale = false]) {
     if (systemFontScale) {
       return min(scale(1), verticalScale(1)) * size * _textScaleFactor;
     } else if (_systemFontScale) {
