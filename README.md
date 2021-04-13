@@ -48,10 +48,10 @@ class MyApp extends StatelessWidget {
   height: 0.5.sh, //50% height
 
   //Scale
-  width: 100.s, //e.g. 360.s (width base) will be 100%
+  width: 360.s, //100% of the base width, the value will scale from this point.
 
   //Vertical scale
-  height: 100.vs, //e.g. 320.vs (half of height base) will be a 50% of height
+  height: 320.vs, //50% of the base height, the value will scale from this point.
 
   //Smart scale
   width: 100.ss,
@@ -76,3 +76,7 @@ class MyApp extends StatelessWidget {
   height: 100.ss.f(0.8),
   fontSize: 16.fss.f(0.1),
 ```
+
+## Demo
+
+![example](demo.jpg)
