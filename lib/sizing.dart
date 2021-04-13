@@ -9,10 +9,11 @@ export 'sizing_extension.dart';
 export 'sizing_builder.dart';
 
 class Sizing {
-  static const Size defaultScreenSize = Size(360, 640);
+  static const Size _defaultScreenSize = Size(360, 640);
   static late Sizing _instance;
 
-  Size _screenSize = defaultScreenSize;
+  Size _baseSize = _defaultScreenSize;
+  Size _screenSize = _defaultScreenSize;
   bool _systemFontScale = false;
   double _factor = 0.5;
   late double _textScaleFactor;
@@ -23,7 +24,11 @@ class Sizing {
     return _instance;
   }
 
-  static void init(BoxConstraints constraints, {bool systemFontScale = false}) {
+  static void init(
+    BoxConstraints constraints, {
+    bool systemFontScale = false,
+    Size baseSize = _defaultScreenSize,
+  }) {
     _instance = Sizing._();
     if (constraints.maxWidth < constraints.maxHeight) {
       _instance._screenSize = Size(constraints.maxWidth, constraints.maxHeight);
@@ -31,6 +36,7 @@ class Sizing {
       _instance._screenSize = Size(constraints.maxHeight, constraints.maxWidth);
     }
     _instance._systemFontScale = systemFontScale;
+    _instance._baseSize = baseSize;
     var window = WidgetsBinding.instance?.window ?? ui.window;
     _instance._textScaleFactor = window.textScaleFactor;
   }
@@ -40,11 +46,15 @@ class Sizing {
   }
 
   double scale(num size) {
-    return Sizing.instance._screenSize.width / Sizing.defaultScreenSize.width * size;
+    return Sizing.instance._screenSize.width /
+        Sizing.instance._baseSize.width *
+        size;
   }
 
   double verticalScale(num size) {
-    return Sizing.instance._screenSize.height / Sizing.defaultScreenSize.height * size;
+    return Sizing.instance._screenSize.height /
+        Sizing.instance._baseSize.height *
+        size;
   }
 
   double smartScale(num size) {
