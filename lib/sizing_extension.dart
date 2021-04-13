@@ -7,7 +7,7 @@ extension SizingExtension on num {
   double get fs => Sizing.instance.fontScale(this);
   double get fss => Sizing.instance.fontSmartScale(this);
 
-  double factor({
+  double f({
     double value = 0.5,
   }) {
     return Sizing.instance.differentFactor(this, value);
