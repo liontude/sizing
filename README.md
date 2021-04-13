@@ -35,13 +35,13 @@ class MyApp extends StatelessWidget {
 }
 ```
 
-## Passing your values (must be numbers)
+## Passing values
 
 ```dart
   //In Sizing, as in many of the packages that exist for handling interface scaling (responsive),
   //a base width and height are set as the starting point for scaling. In Sizing these base values
   //are width: 360 and height: 640.
-  baseSize: Size(360, 690), //not required. In SizingBuilder
+  baseSize: Size(360, 640), //Not required. To change these values through SizingBuilder
 
   // Screen Width and Screen Height
   width: 1.sw, //100% width
