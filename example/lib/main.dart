@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizingBuilder(
-      systemFontScale: false,
+      systemFontScale: true,
       builder: () => MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Sizing',
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
           primaryTextTheme: TextTheme(
             headline6: TextStyle(
               color: Colors.white,
-              fontSize: 16.ss(0.5),
+              fontSize: 16.fss,
             ),
           ),
           appBarTheme: AppBarTheme(
@@ -29,16 +29,16 @@ class MyApp extends StatelessWidget {
           ),
           textTheme: TextTheme(
             headline1: TextStyle(
-              fontSize: 16.ss(),
+              fontSize: 16.fss,
               fontWeight: FontWeight.normal,
               color: Colors.cyan,
             ),
             headline2: TextStyle(
-              fontSize: 14.ss(),
+              fontSize: 14.fss,
               height: 1.5,
             ),
             bodyText2: TextStyle(
-              fontSize: 14.ss(),
+              fontSize: 14.fss,
               height: 1.5,
             ),
           ),
@@ -65,24 +65,23 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
-        toolbarHeight: 40.ss(),
+        toolbarHeight: 40.fss,
       ),
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Padding(
-              padding: EdgeInsets.all(10.ss()),
+              padding: EdgeInsets.all(10.ss),
               child: Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(bottom: 10.ss()),
+                    padding: EdgeInsets.only(bottom: 10.ss),
                     child: Text(
                       'Base Size 360x640',
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline2
-                          .copyWith(fontSize: 12.ss()),
+                      style: Theme.of(context).textTheme.headline2.copyWith(
+                            fontSize: 12.fss,
+                          ),
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -118,7 +117,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 12.ss(),
+                          fontSize: 12.fss,
                         ),
                       ),
                       Text(
@@ -127,7 +126,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 12.ss(),
+                          fontSize: 12.fss,
                         ),
                       ),
                     ],
@@ -146,16 +145,16 @@ class _MyHomePageState extends State<MyHomePage> {
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 12.ss(),
+                          fontSize: 12.fss,
                         ),
                       ),
                       Text(
-                        'width: 180.s (360*0.5)\n'
-                        'height: 160.vs (640*0.25)',
+                        'width: 180.s (360/2)\n'
+                        'height: 160.vs (640/4)',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 12.ss(),
+                          fontSize: 12.fss,
                         ),
                       ),
                     ],
@@ -164,7 +163,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
             SizedBox(
-              height: 10.ss(),
+              height: 10.fss,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -205,8 +204,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 Container(
                   padding: EdgeInsets.all(10),
-                  width: 100.ss(),
-                  height: 100.ss(),
+                  width: 100.ss,
+                  height: 100.ss,
                   color: Colors.cyan[600],
                   child: FittedBox(
                     fit: BoxFit.fitWidth,
@@ -222,7 +221,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
             SizedBox(
-              height: 10.ss(),
+              height: 10.ss,
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -236,22 +235,26 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
                 Text(
-                  'fontSize: 16.fs(false) | Font Scale ${num.parse(16.fs().toStringAsFixed(2))}',
+                  'fontSize: 16.fs | Font Scale ${num.parse(16.fs.toStringAsFixed(2))}',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 16.fs(),
+                    fontSize: 16.fs,
                     height: 1.5,
                   ),
                 ),
                 Text(
-                  'fontSize: 16.fss() | Font Smart Scale ${num.parse(16.fss(factor: 2).toStringAsFixed(2))}',
+                  'fontSize: 16.fss | Font Smart Scale ${num.parse(16.fss.toStringAsFixed(2))}',
                   style: TextStyle(
-                    fontSize: 16.fss(),
+                    fontSize: 16.fss,
                     height: 1.5,
                   ),
                 ),
                 SizedBox(
-                  height: 10.vs,
+                  height: 10.ss,
+                ),
+                Divider(),
+                SizedBox(
+                  height: 10.ss,
                 ),
               ],
             )

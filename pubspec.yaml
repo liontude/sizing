@@ -1,10 +1,10 @@
 name: sizing
-description: A new Flutter package.
+description: Simple package to handle scaling / responsive user interfaces (UI) on different screen sizes.
 version: 1.0.0
 homepage: https://github.com/liontude/sizing
 
 environment:
-  sdk: '>=2.12.0-29.10.beta <3.0.0'
+  sdk: '>=2.12.0 <3.0.0'
   flutter: ">=1.17.0"
 
 dependencies:

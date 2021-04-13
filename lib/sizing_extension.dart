@@ -3,22 +3,20 @@ import 'package:sizing/sizing.dart';
 extension SizingExtension on num {
   double get s => Sizing.instance.scale(this);
   double get vs => Sizing.instance.verticalScale(this);
+  double get ss => Sizing.instance.smartScale(this);
+  double get fs => Sizing.instance.fontScale(this);
+  double get fss => Sizing.instance.fontSmartScale(this);
 
-  double ss([double factor = 0.5]) {
-    return Sizing.instance.smartScale(this, factor);
+  double f(
+    double value,
+  ) {
+    return Sizing.instance.differentFactor(this, value);
   }
 
-  double fs({
-    bool systemFontScale = false,
-  }) {
-    return Sizing.instance.fontScale(this, systemFontScale);
-  }
-
-  double fss({
-    bool systemFontScale = false,
-    double factor = 0.5,
-  }) {
-    return Sizing.instance.fontSmartScale(this, systemFontScale, factor);
+  double self(
+    bool allow,
+  ) {
+    return Sizing.instance.selfFontScale(this, allow);
   }
 
   double get sw => Sizing.instance.screenWidth(this);
