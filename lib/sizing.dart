@@ -14,6 +14,7 @@ class Sizing {
 
   Size _screenSize = defaultScreenSize;
   bool _systemFontScale = false;
+  double _factor = 0.5;
   late double _textScaleFactor;
 
   Sizing._();
@@ -39,41 +40,29 @@ class Sizing {
   }
 
   double scale(num size) {
-    return Sizing.instance._screenSize.width /
-        Sizing.defaultScreenSize.width *
-        size;
+    return Sizing.instance._screenSize.width / Sizing.defaultScreenSize.width * size;
   }
 
   double verticalScale(num size) {
-    return Sizing.instance._screenSize.height /
-        Sizing.defaultScreenSize.height *
-        size;
+    return Sizing.instance._screenSize.height / Sizing.defaultScreenSize.height * size;
   }
 
-  double smartScale(num size, [double factor = 0.5]) {
-    return size + (scale(size) - size) * factor;
+  double smartScale(num size) {
+    return size + (scale(size) - size) * _factor;
   }
 
-  double fontScale(num size, [bool systemFontScale = false]) {
-    if (systemFontScale) {
-      return min(scale(1), verticalScale(1)) * size * _textScaleFactor;
-    } else if (_systemFontScale) {
+  double fontScale(num size) {
+    if (_systemFontScale) {
       return min(scale(1), verticalScale(1)) * size * _textScaleFactor;
     }
     return min(scale(1), verticalScale(1)) * size / _textScaleFactor;
   }
 
-  double fontSmartScale(
-    num size, [
-    bool systemFontScale = false,
-    double factor = 0.5,
-  ]) {
-    if (systemFontScale) {
-      return smartScale(size, factor) * _textScaleFactor;
-    } else if (_systemFontScale) {
-      return smartScale(size, factor) * _textScaleFactor;
+  double fontSmartScale(num size) {
+    if (_systemFontScale) {
+      return smartScale(size) * _textScaleFactor;
     }
-    return smartScale(size, factor) / _textScaleFactor;
+    return smartScale(size) / _textScaleFactor;
   }
 
   double screenWidth(num size) {
@@ -84,7 +73,22 @@ class Sizing {
     return _screenSize.height * size;
   }
 
-  double radius(num size) {
-    return min(scale(1), verticalScale(1)) * size;
+  double selfFontScale(
+    num size, [
+    bool allow = false,
+  ]) {
+    if (!_systemFontScale && allow) {
+      return size * _textScaleFactor;
+    } else if (_systemFontScale && !allow) {
+      return size / _textScaleFactor;
+    }
+    return size.toDouble();
+  }
+
+  double differentFactor(
+    num size, [
+    double factor = 0.5,
+  ]) {
+    return (size / _factor) * factor;
   }
 }
