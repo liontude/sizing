@@ -1,7 +1,8 @@
-# sizing
+# Sizing
 
-**Simple package to handle scaling / responsive user interfaces (UI) on different screen sizes.
-Part of the idea is taken from the component for RN Size Matters, flutter_screenutil, and others.**
+**Simple flutter package to handle scaling / responsive user interfaces (UI) on different screen
+sizes. Part of the idea is taken from the component for RN Size Matters, flutter_screenutil,
+and others.**
 
 ## Getting Started
 
