@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sizing/sizing.dart';
-import 'console_log.dart';
 
 void main() {
   runApp(MyApp());
@@ -61,7 +59,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    consoleLog();
+    // consoleLog();
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),

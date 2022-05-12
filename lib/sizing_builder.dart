@@ -4,10 +4,6 @@ import 'package:sizing/sizing.dart';
 typedef SizingWidgetBuilder = Widget Function();
 
 class SizingBuilder extends StatelessWidget {
-  final SizingWidgetBuilder builder;
-  final bool systemFontScale;
-  final Size baseSize;
-
   const SizingBuilder({
     Key? key,
     required this.builder,
@@ -15,17 +11,23 @@ class SizingBuilder extends StatelessWidget {
     this.baseSize = const Size(360, 640),
   }) : super(key: key);
 
+  final SizingWidgetBuilder builder;
+  final bool systemFontScale;
+  final Size baseSize;
+
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (_, BoxConstraints constraints) {
-      if (constraints.maxWidth != 0) {
-        Sizing.init(
-          constraints,
-          systemFontScale: systemFontScale,
-        );
-        return builder.call();
-      }
-      return Container();
-    });
+    return LayoutBuilder(
+      builder: (_, BoxConstraints constraints) {
+        if (constraints.maxWidth != 0) {
+          Sizing.init(
+            constraints,
+            systemFontScale: systemFontScale,
+          );
+          return builder.call();
+        }
+        return Container();
+      },
+    );
   }
 }
