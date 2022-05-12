@@ -13,10 +13,10 @@ extension SizingExtension on num {
     return Sizing.instance.differentFactor(this, value);
   }
 
-  double self(
-    bool allow,
-  ) {
-    return Sizing.instance.selfFontScale(this, allow);
+  double self({
+    required bool allow,
+  }) {
+    return Sizing.instance.selfFontScale(this, allow: allow);
   }
 
   double get sw => Sizing.instance.screenWidth(this);

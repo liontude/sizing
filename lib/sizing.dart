@@ -1,24 +1,25 @@
 library sizing;
 
 import 'dart:math';
-import 'dart:ui' as ui;
 
 import 'package:flutter/widgets.dart';
-
-export 'sizing_extension.dart';
 export 'sizing_builder.dart';
+export 'sizing_extension.dart';
 
 class Sizing {
+  factory Sizing() {
+    return _instance;
+  }
+
+  Sizing._();
   static const Size _defaultScreenSize = Size(360, 640);
   static late Sizing _instance;
 
   Size _baseSize = _defaultScreenSize;
   Size _screenSize = _defaultScreenSize;
   bool _systemFontScale = false;
-  double _factor = 0.5;
+  final double _factor = 0.5;
   late double _textScaleFactor;
-
-  Sizing._();
 
   static Sizing get instance {
     return _instance;
@@ -37,12 +38,8 @@ class Sizing {
     }
     _instance._systemFontScale = systemFontScale;
     _instance._baseSize = baseSize;
-    var window = WidgetsBinding.instance?.window ?? ui.window;
+    final window = WidgetsBinding.instance.window;
     _instance._textScaleFactor = window.textScaleFactor;
-  }
-
-  factory Sizing() {
-    return _instance;
   }
 
   double scale(num size) {
@@ -84,9 +81,9 @@ class Sizing {
   }
 
   double selfFontScale(
-    num size, [
+    num size, {
     bool allow = false,
-  ]) {
+  }) {
     if (!_systemFontScale && allow) {
       return size * _textScaleFactor;
     } else if (_systemFontScale && !allow) {
