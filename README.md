@@ -9,7 +9,7 @@ and others.**
 ### Adding package
 
 ```yaml
-sizing: ^1.0.0
+sizing: ^1.1.0
 ```
 
 ### Importing package
