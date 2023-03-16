@@ -23,6 +23,7 @@ class SizingBuilder extends StatelessWidget {
           Sizing.init(
             constraints,
             systemFontScale: systemFontScale,
+            baseSize: baseSize,
           );
           return builder.call();
         }
