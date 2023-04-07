@@ -1,3 +1,8 @@
+## 1.1.2
+
+* Upgrade packages and fix linter warnings.
+* Fix sizing builder not providing base size to Sizing init function (43e103a)
+
 ## 1.1.1
 
 * Update README information.
