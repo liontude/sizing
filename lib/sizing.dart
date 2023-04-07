@@ -1,8 +1,7 @@
-library sizing;
-
 import 'dart:math';
 
 import 'package:flutter/widgets.dart';
+
 export 'sizing_builder.dart';
 export 'sizing_extension.dart';
 

@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primaryColor: Colors.cyan,
           primaryTextTheme: TextTheme(
-            headline6: TextStyle(
+            titleLarge: TextStyle(
               color: Colors.white,
               fontSize: 16.fss,
             ),
@@ -26,16 +26,16 @@ class MyApp extends StatelessWidget {
             centerTitle: true,
           ),
           textTheme: TextTheme(
-            headline1: TextStyle(
+            displayLarge: TextStyle(
               fontSize: 16.fss,
               fontWeight: FontWeight.normal,
               color: Colors.cyan,
             ),
-            headline2: TextStyle(
+            displayMedium: TextStyle(
               fontSize: 14.fss,
               height: 1.5,
             ),
-            bodyText2: TextStyle(
+            bodyMedium: TextStyle(
               fontSize: 14.fss,
               height: 1.5,
             ),
@@ -77,7 +77,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     padding: EdgeInsets.only(bottom: 10.ss),
                     child: Text(
                       'Base Size 360x640',
-                      style: Theme.of(context).textTheme.headline2.copyWith(
+                      style: Theme.of(context).textTheme.displayMedium.copyWith(
                             fontSize: 12.fss,
                           ),
                       textAlign: TextAlign.center,
@@ -85,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   Text(
                     'On this device'.toUpperCase(),
-                    style: Theme.of(context).textTheme.headline1,
+                    style: Theme.of(context).textTheme.displayLarge,
                     textAlign: TextAlign.center,
                   ),
                   Text(

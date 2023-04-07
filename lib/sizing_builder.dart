@@ -5,11 +5,11 @@ typedef SizingWidgetBuilder = Widget Function();
 
 class SizingBuilder extends StatelessWidget {
   const SizingBuilder({
-    Key? key,
     required this.builder,
     this.systemFontScale = false,
     this.baseSize = const Size(360, 640),
-  }) : super(key: key);
+    super.key,
+  });
 
   final SizingWidgetBuilder builder;
   final bool systemFontScale;
