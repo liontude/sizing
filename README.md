@@ -2,6 +2,8 @@
 
 Flutter package for scaling UI elements across different screen sizes. One single extension for everything — fonts, containers, padding, and radius all scale with the same formula, so design proportions are always preserved.
 
+![Demo](demo.png)
+
 ## Installation
 
 ```yaml
