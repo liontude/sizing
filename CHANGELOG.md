@@ -1,3 +1,7 @@
+## 2.0.1
+
+- Fix README demo image not rendering on pub.dev (use absolute GitHub raw URL).
+
 ## 2.0.0
 
 **Breaking change — complete redesign. See migration notes below.**
