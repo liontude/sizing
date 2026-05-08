@@ -1,82 +1,147 @@
 # Sizing
 
-**Simple flutter package to handle scaling / responsive user interfaces (UI) on different screen
-sizes. Part of the idea is taken from the component for RN Size Matters, flutter_screenutil,
-and others.**
+Flutter package for scaling UI elements across different screen sizes. One single extension for everything — fonts, containers, padding, and radius all scale with the same formula, so design proportions are always preserved.
 
-## Getting Started
-
-### Adding package
+## Installation
 
 ```yaml
-sizing: ^1.1.1
+dependencies:
+  sizing: ^2.0.0
 ```
 
-### Importing package
+## Setup
 
-```yaml
-import 'package:sizing/sizing.dart';
-```
-
-## Wrap your main builder with SizingBuilder and you're ready to go
+Wrap your app with `SizingBuilder` at the root:
 
 ```dart
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
-    @override
-    Widget build(BuildContext context) {
-        return SizingBuilder(
-        builder: () => MaterialApp(
-                ...
-            ),
-        );
-    }
+void main() {
+  runApp(
+    SizingBuilder(
+      builder: (context) => const MyApp(),
+    ),
+  );
 }
 ```
 
-## Passing values
+### SizingBuilder parameters
+
+| Parameter | Type | Default | Description |
+|-----------|------|---------|-------------|
+| `baseSize` | `Size` | `Size(390, 850)` | Design reference dimensions. Can be in any orientation. |
+| `factor` | `double` [0–1] | `0.5` | Scaling intensity. `0` = no scaling, `1` = pure linear, `0.5` = square root curve (recommended). |
+| `respectSystemFontScale` | `bool` | `true` | Respect the system accessibility text size preference. |
+| `scaleLayoutWithFont` | `bool` | `true` | When `true`, layout and fonts grow together with the accessibility preference, preserving proportions. When `false`, only text grows (native Flutter behavior). |
+| `customScale` | `CustomScaleFunction?` | `null` | Custom scaling function for the `.c` extension. |
+
+## Extensions
 
 ```dart
-  //In Sizing, as in many of the packages that exist for handling interface scaling (responsive),
-  //a base width and height are set as the starting point for scaling. In Sizing these base values
-  //are width: 360 and height: 640.
-  baseSize: Size(360, 640), //Not required. Change these values through SizingBuilder
+// Power scale (default) — smooth curve, flattens on large screens
+16.s
 
-  // Screen Width and Screen Height
-  width: 1.sw, //100% width
-  height: 0.5.sh, //50% height
+// Linear scale — constant growth, useful for hero images
+16.l
 
-  //Scale
-  width: 360.s, //100% of the base width, the value will scale from this point.
+// Custom scale — uses your CustomScaleFunction
+16.c
 
-  //Vertical scale
-  height: 320.vs, //50% of the base height, the value will scale from this point.
+// Inline factor override for one element (does not affect global state)
+16.s.f(0.8)
 
-  //Smart scale
-  width: 100.ss,
-
-  //Font scale.
-  fontSize: 16.fs
-
-  //Font Smart Scale.
-  fontSize: 16.fss,
-
-  //if you want the fonts to scale with the system accessibility option (Android / IOs) define
-  //on SizingBuilder systemFontScale with true (by default false).
-  systemFontScale: true, //not required
-
-  //if you want a particular text to scale with the system accessibility option regardless
-  //of the global setting (systemFontScale). *Apply only to fontSize to avoid unwanted behaviors.
-  fontSize: 16.fs.self(true), //self(false)
-
-  //On Smart Scale (ss) and Font Smart Scale (fss) a scale factor comes into play, this factor
-  //by default is 0.5; Use this to manipulate this value. *We recommend only applying to .ss
-  //and .fss to avoid unwanted behavior.
-  height: 100.ss.f(0.8),
-  fontSize: 16.fss.f(0.1),
+// Screen percentages
+0.5.w   // 50% of screen width
+0.25.h  // 25% of screen height
 ```
 
-## Demo
+## Scaling models
 
-![example](demo.jpg)
+### Power (`.s`) — recommended
+
+```
+size × ratio^factor
+```
+
+| factor | ratio 1.0 | ratio 1.5 | ratio 2.0 | ratio 2.84 (13" tablet) |
+|--------|-----------|-----------|-----------|--------------------------|
+| 0.3 | ×1.00 | ×1.13 | ×1.23 | ×1.37 |
+| **0.5** | **×1.00** | **×1.22** | **×1.41** | **×1.69** |
+| 0.7 | ×1.00 | ×1.31 | ×1.62 | ×2.07 |
+| 1.0 | ×1.00 | ×1.50 | ×2.00 | ×2.84 |
+
+### Linear (`.l`)
+
+```
+size × (1 + (ratio − 1) × factor)
+```
+
+Grows at a constant rate. More aggressive than Power at high ratios.
+
+### Custom (`.c`)
+
+```dart
+typedef CustomScaleFunction = double Function(double ratio, double factor);
+
+SizingBuilder(
+  customScale: (ratio, factor) => ratio * 1.2,
+  builder: (context) => const MyApp(),
+)
+```
+
+## Ratio calculation
+
+The ratio is always computed as **short-side / short-side**, making it orientation-agnostic:
+
+```
+shortRatio = min(screenW, screenH) / min(baseW, baseH)
+```
+
+Rotating the device does not break calculations. `baseSize` can be passed in portrait or landscape — the result is identical.
+
+## Accessibility
+
+| `respectSystemFontScale` | `scaleLayoutWithFont` | Behavior |
+|---|---|---|
+| `true` | `true` | **Default.** Layout and fonts grow together. Proportions always preserved. |
+| `true` | `false` | Only text grows (native Flutter behavior). Layout stays fixed. |
+| `false` | — | App ignores system accessibility completely. |
+
+## Usage example
+
+```dart
+Widget build(BuildContext context) {
+  return Padding(
+    padding: EdgeInsets.all(12.s),
+    child: Column(
+      children: [
+        // Font and container scale exactly the same
+        Text('Hello', style: TextStyle(fontSize: 16.s)),
+        Container(height: 48.s, width: 0.9.w),
+
+        // Hero image — linear grows more on large screens
+        Container(height: 200.l),
+
+        // Inline factor override for one element
+        Text('Title', style: TextStyle(fontSize: 24.s.f(0.8))),
+
+        SizedBox(height: 0.1.h),
+      ],
+    ),
+  );
+}
+```
+
+## Migrating from v1
+
+```dart
+// SizingBuilder
+builder: () => ...          →  builder: (context) => ...
+systemFontScale: true       →  respectSystemFontScale: true
+
+// Extensions
+16.fs  / 16.fss  →  16.s
+100.ss / 100.s   →  100.s
+100.vs           →  100.s
+0.5.sw           →  0.5.w
+0.5.sh           →  0.5.h
+16.fss.f(0.8)    →  16.s.f(0.8)
+```
